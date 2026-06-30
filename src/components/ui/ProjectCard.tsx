@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { MapPin, Zap, ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ProjectCardProps {
   project: Project;
@@ -15,6 +16,9 @@ const categoryColors: Record<string, string> = {
 };
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const { t } = useLanguage();
+  const categoryLabel = t.categories[project.category as keyof typeof t.categories] ?? project.category;
+
   return (
     <Link
       to={`/projects/${project.id}`}
@@ -25,18 +29,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <img
           src={project.coverImage}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-          style={{ '--tw-scale-x': '1.08', '--tw-scale-y': '1.08' } as React.CSSProperties}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
 
         {/* Category badge */}
-        <span className={`absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full border backdrop-blur-sm ${categoryColors[project.category] ?? 'bg-white/10 text-white border-white/20'}`}>
-          {project.category}
+        <span className={`absolute top-4 start-4 text-xs font-semibold px-3 py-1 rounded-full border backdrop-blur-sm ${categoryColors[project.category] ?? 'bg-white/10 text-white border-white/20'}`}>
+          {categoryLabel}
         </span>
 
         {/* Arrow button */}
-        <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-amber flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+        <div className="absolute top-4 end-4 w-9 h-9 rounded-full bg-amber flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
           <ArrowUpRight className="w-4 h-4 text-navy" />
         </div>
       </div>

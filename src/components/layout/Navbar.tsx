@@ -2,18 +2,20 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { label: "Home", to: "/" },
-  { label: "About", to: "/about" },
-  { label: "Projects", to: "/projects" },
-  { label: "Contact", to: "/contact" },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { lang, toggle, t } = useLanguage();
+
+  const navLinks = [
+    { label: t.nav.home, to: "/" },
+    { label: t.nav.about, to: "/about" },
+    { label: t.nav.projects, to: "/projects" },
+    { label: t.nav.contact, to: "/contact" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -65,13 +67,13 @@ export default function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`relative text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-200 group py-1 ${
+                  className={`relative text-xs font-semibold transition-colors duration-200 group py-1 ${
                     active ? "text-amber" : "text-white/65 hover:text-white"
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-0.5 left-0 h-px bg-amber transition-all duration-300 ${
+                    className={`absolute -bottom-0.5 start-0 h-px bg-amber transition-all duration-300 ${
                       active ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -80,30 +82,42 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-5">
+          {/* Desktop CTA + Lang Toggle */}
+          <div className="hidden md:flex items-center gap-4">
+            {/* Language toggle */}
+            <button
+              onClick={toggle}
+              className="flex items-center gap-1.5 text-white/45 hover:text-white text-xs font-semibold transition-colors duration-200 px-3 py-1.5 rounded-full border border-white/10 hover:border-white/20"
+              aria-label="Switch language"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-amber flex-shrink-0" />
+              {lang === "en" ? "العربية" : "EN"}
+            </button>
             <Link
               to="/contact"
-              className="text-xs font-semibold text-white/55 hover:text-white tracking-wider uppercase transition-colors duration-200"
+              className="bg-amber hover:bg-amber-light text-navy text-xs font-black px-6 py-2.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-amber/30 hover:-translate-y-0.5"
             >
-              Contact
-            </Link>
-            <Link
-              to="/contact"
-              className="bg-amber hover:bg-amber-light text-navy text-xs font-black px-6 py-2.5 rounded-full tracking-[0.1em] uppercase transition-all duration-300 hover:shadow-lg hover:shadow-amber/30 hover:-translate-y-0.5"
-            >
-              Get a Quote
+              {t.nav.getQuote}
             </Link>
           </div>
 
           {/* Mobile Toggle */}
-          <button
-            onClick={toggleMobile}
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl text-white hover:bg-white/10 transition-colors duration-200"
-            aria-label="Toggle navigation"
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={toggle}
+              className="flex items-center gap-1 text-white/45 hover:text-white text-xs font-semibold transition-colors duration-200 px-2.5 py-1.5 rounded-full border border-white/10"
+              aria-label="Switch language"
+            >
+              {lang === "en" ? "ع" : "EN"}
+            </button>
+            <button
+              onClick={toggleMobile}
+              className="w-10 h-10 flex items-center justify-center rounded-xl text-white hover:bg-white/10 transition-colors duration-200"
+              aria-label="Toggle navigation"
+            >
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -155,9 +169,9 @@ export default function Navbar() {
               >
                 <Link
                   to="/contact"
-                  className="block w-full bg-amber text-navy text-center font-black text-base py-4 rounded-2xl hover:bg-amber-light transition-colors tracking-wider uppercase"
+                  className="block w-full bg-amber text-navy text-center font-black text-base py-4 rounded-2xl hover:bg-amber-light transition-colors"
                 >
-                  Get a Free Quote
+                  {t.nav.getFreeQuote}
                 </Link>
               </motion.div>
 

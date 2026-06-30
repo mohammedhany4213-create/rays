@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -14,6 +14,7 @@
   --color-text-muted: #8899AA;
   --font-sans: "Inter", "Poppins", sans-serif;
   --font-display: "Poppins", "Inter", sans-serif;
+  --font-cairo: "Cairo", sans-serif;
 }
 
 *, *::before, *::after {
@@ -30,6 +31,26 @@ body {
   color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* RTL — Cairo font, no letter-spacing */
+[dir="rtl"] {
+  font-family: "Cairo", sans-serif;
+}
+
+[dir="rtl"] .tracking-\[0\.3em\],
+[dir="rtl"] .tracking-\[0\.2em\],
+[dir="rtl"] .tracking-\[0\.18em\],
+[dir="rtl"] .tracking-\[0\.15em\],
+[dir="rtl"] .tracking-\[0\.4em\],
+[dir="rtl"] .tracking-widest,
+[dir="rtl"] .tracking-wider,
+[dir="rtl"] .tracking-wide {
+  letter-spacing: 0 !important;
+}
+
+[dir="rtl"] .uppercase {
+  text-transform: none;
 }
 
 /* Custom scrollbar */

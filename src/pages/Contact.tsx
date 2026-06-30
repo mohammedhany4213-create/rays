@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   Sun,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FormData {
   name: string;
@@ -18,29 +19,6 @@ interface FormData {
   company: string;
   message: string;
 }
-
-const contactDetails = [
-  {
-    Icon: MapPin,
-    label: "Office Address",
-    value: "123 Solar Street, Fifth Settlement\nNew Cairo, Egypt",
-  },
-  {
-    Icon: Phone,
-    label: "Phone Numbers",
-    value: "+20 100 000 0000\n+20 122 000 0000",
-  },
-  {
-    Icon: Mail,
-    label: "Email",
-    value: "hello@rayselectric.eg\nsupport@rayselectric.eg",
-  },
-  {
-    Icon: Clock,
-    label: "Working Hours",
-    value: "Sunday – Thursday\n9:00 AM – 6:00 PM",
-  },
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -94,11 +72,11 @@ function FloatingInput({
       )}
       <label
         htmlFor={id}
-        className="absolute top-2 left-4 text-[10px] text-white/35 tracking-widest uppercase font-semibold peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/25 peer-placeholder-shown:top-4 peer-placeholder-shown:tracking-normal peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-amber peer-focus:tracking-widest peer-focus:font-semibold transition-all duration-200 pointer-events-none"
+        className="absolute top-2 start-4 text-[10px] text-white/35 font-semibold peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/25 peer-placeholder-shown:top-4 peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-amber peer-focus:font-semibold transition-all duration-200 pointer-events-none"
       >
         {label}
       </label>
-      {error && <p className="mt-1.5 text-red-400/80 text-xs ml-1">{error}</p>}
+      {error && <p className="mt-1.5 text-red-400/80 text-xs ms-1">{error}</p>}
     </div>
   );
 }
@@ -112,6 +90,14 @@ export default function Contact() {
   } = useForm<FormData>();
 
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useLanguage();
+
+  const contactDetails = [
+    { Icon: MapPin, label: t.contact.detailsAddress, value: t.contact.addressValue },
+    { Icon: Phone, label: t.contact.detailsPhone, value: t.contact.phoneValue },
+    { Icon: Mail, label: t.contact.detailsEmail, value: t.contact.emailValue },
+    { Icon: Clock, label: t.contact.detailsHours, value: t.contact.hoursValue },
+  ];
 
   const onSubmit = async (data: FormData) => {
     await new Promise((r) => setTimeout(r, 1200));
@@ -125,16 +111,16 @@ export default function Contact() {
       {/* ─── HERO ─── */}
       <section className="relative pt-40 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-[500px] h-[400px] bg-amber/4 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 end-0 w-[500px] h-[400px] bg-amber/4 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="inline-flex items-center gap-2 text-amber text-[11px] font-bold tracking-[0.3em] uppercase mb-6"
+            className="inline-flex items-center gap-2 text-amber text-[11px] font-bold mb-6"
           >
             <span className="w-8 h-px bg-amber" />
-            Get In Touch
+            {t.contact.badge}
             <span className="w-8 h-px bg-amber" />
           </motion.span>
 
@@ -142,20 +128,20 @@ export default function Contact() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6"
           >
-            Let's Power Your
+            {t.contact.heroTitle}
             <br />
-            <span className="text-gradient">Future Together</span>
+            <span className="text-gradient">{t.contact.heroHighlight}</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/50 text-lg max-w-xl mx-auto leading-relaxed"
+            className="text-white/50 text-base max-w-xl mx-auto leading-relaxed"
           >
-            Reach out for a free consultation. Our engineering team will respond within one business day.
+            {t.contact.heroCopy}
           </motion.p>
         </div>
       </section>
@@ -172,9 +158,9 @@ export default function Contact() {
             className="lg:col-span-3"
           >
             <div className="p-8 md:p-10 rounded-3xl bg-navy-light border border-white/5">
-              <h2 className="text-2xl font-black text-white mb-2">Send Us a Message</h2>
+              <h2 className="text-xl font-black text-white mb-2">{t.contact.formTitle}</h2>
               <p className="text-white/35 text-sm mb-8">
-                Fill out the form below and we'll get back to you promptly.
+                {t.contact.formCopy}
               </p>
 
               {submitted ? (
@@ -186,15 +172,15 @@ export default function Contact() {
                   <div className="w-16 h-16 rounded-full bg-amber/15 border border-amber/30 flex items-center justify-center mx-auto mb-5">
                     <CheckCircle2 className="w-8 h-8 text-amber" />
                   </div>
-                  <h3 className="text-white font-black text-2xl mb-2">Message Sent!</h3>
+                  <h3 className="text-white font-black text-xl mb-2">{t.contact.sentTitle}</h3>
                   <p className="text-white/45 text-sm mb-8">
-                    Thank you for reaching out. Our team will contact you within one business day.
+                    {t.contact.sentCopy}
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
                     className="text-amber hover:text-amber-light font-semibold text-sm transition-colors"
                   >
-                    Send Another Message
+                    {t.contact.sendAnother}
                   </button>
                 </motion.div>
               ) : (
@@ -202,14 +188,14 @@ export default function Contact() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <FloatingInput
                       id="name"
-                      label="Full Name"
+                      label={t.contact.fieldName}
                       register={register}
                       error={errors.name?.message}
                       required
                     />
                     <FloatingInput
                       id="phone"
-                      label="Phone Number"
+                      label={t.contact.fieldPhone}
                       type="tel"
                       register={register}
                       error={errors.phone?.message}
@@ -219,7 +205,7 @@ export default function Contact() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <FloatingInput
                       id="email"
-                      label="Email Address"
+                      label={t.contact.fieldEmail}
                       type="email"
                       register={register}
                       error={errors.email?.message}
@@ -227,14 +213,14 @@ export default function Contact() {
                     />
                     <FloatingInput
                       id="company"
-                      label="Company (Optional)"
+                      label={t.contact.fieldCompany}
                       register={register}
                       error={errors.company?.message}
                     />
                   </div>
                   <FloatingInput
                     id="message"
-                    label="Your Message"
+                    label={t.contact.fieldMessage}
                     register={register}
                     error={errors.message?.message}
                     required
@@ -245,16 +231,16 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group w-full flex items-center justify-center gap-2.5 bg-amber hover:bg-amber-light disabled:opacity-60 text-navy font-black text-sm py-4 rounded-xl tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-amber/25 mt-2"
+                    className="group w-full flex items-center justify-center gap-2.5 bg-amber hover:bg-amber-light disabled:opacity-60 text-navy font-black text-sm py-4 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-amber/25 mt-2"
                   >
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-navy/30 border-t-navy rounded-full animate-spin" />
-                        Sending...
+                        {t.contact.sending}
                       </>
                     ) : (
                       <>
-                        Send Message
+                        {t.contact.sendBtn}
                         <Send className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </>
                     )}
@@ -266,7 +252,6 @@ export default function Contact() {
 
           {/* Info sidebar */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            {/* Contact details */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -280,8 +265,8 @@ export default function Contact() {
                   <Sun className="w-4 h-4 text-navy" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <span className="block text-white font-black text-sm tracking-wider">RAYS ELECTRIC</span>
-                  <span className="block text-amber/60 text-xs">Premium Solar Solutions</span>
+                  <span className="block text-white font-black text-sm">RAYS ELECTRIC</span>
+                  <span className="block text-amber/60 text-xs">{t.contact.brandTagline}</span>
                 </div>
               </div>
 
@@ -292,7 +277,7 @@ export default function Contact() {
                       <Icon className="w-4 h-4 text-amber" />
                     </div>
                     <div>
-                      <span className="block text-white/35 text-[10px] tracking-[0.18em] uppercase font-semibold mb-1">
+                      <span className="block text-white/35 text-[10px] font-semibold mb-1">
                         {label}
                       </span>
                       <span className="block text-white/70 text-sm leading-relaxed whitespace-pre-line">
@@ -304,7 +289,6 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* Quick promise card */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -313,15 +297,10 @@ export default function Contact() {
               custom={2}
               className="p-7 rounded-3xl bg-amber/8 border border-amber/15"
             >
-              <h3 className="text-white font-bold text-base mb-4">What Happens Next?</h3>
+              <h3 className="text-white font-bold text-base mb-4">{t.contact.nextTitle}</h3>
               <div className="space-y-4">
-                {[
-                  "We review your inquiry within 1 business day",
-                  "An engineer calls you to discuss your requirements",
-                  "We conduct a free site assessment",
-                  "You receive a detailed proposal and ROI projection",
-                ].map((step, i) => (
-                  <div key={step} className="flex items-start gap-3">
+                {t.contact.nextSteps.map((step, i) => (
+                  <div key={i} className="flex items-start gap-3">
                     <span className="w-5 h-5 rounded-full bg-amber/20 border border-amber/30 text-amber text-[10px] font-black flex items-center justify-center flex-shrink-0 mt-0.5">
                       {i + 1}
                     </span>
