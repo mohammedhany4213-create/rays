@@ -28,7 +28,7 @@ export default function Projects() {
       {/* ─── HERO ─── */}
       <section className="relative pt-40 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber/5 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-amber/5 blur-[100px] rounded-full pointer-events-none" />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.span
@@ -74,7 +74,7 @@ export default function Projects() {
                 <button
                   key={cat}
                   onClick={() => setActive(cat)}
-                  className={`flex-shrink-0 px-5 py-2 rounded-full text-xs font-semibold transition-all duration-250 ${
+                  className={`shrink-0 px-5 py-2 rounded-full text-xs font-semibold transition-all duration-250 ${
                     active === cat
                       ? "bg-amber text-navy shadow-lg shadow-amber/20"
                       : "border border-white/10 text-white/50 hover:border-white/25 hover:text-white/80"

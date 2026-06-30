@@ -90,7 +90,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {contactRows.map(({ Icon, text }) => (
                 <li key={text} className="flex items-start gap-3">
-                  <Icon className="w-3.5 h-3.5 text-amber flex-shrink-0 mt-0.5" />
+                  <Icon className="w-3.5 h-3.5 text-amber shrink-0 mt-0.5" />
                   <span className="text-white/40 text-sm leading-relaxed whitespace-pre-line">{text}</span>
                 </li>
               ))}
