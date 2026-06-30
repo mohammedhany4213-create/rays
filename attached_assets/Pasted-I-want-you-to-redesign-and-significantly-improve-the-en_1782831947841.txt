@@ -1,0 +1,121 @@
+I want you to redesign and significantly improve the entire website UI/UX to match the quality of premium international websites such as Aurevia and Solar Valute, while creating a unique design that is not copied from any existing website.
+
+The company is an Egyptian solar energy company called RAYS, so the visual identity should communicate trust, innovation, sustainability, engineering excellence, and premium quality.
+
+## General Design Guidelines
+
+- Create a modern, luxurious, minimal design.
+- Improve spacing, typography, hierarchy, and visual balance.
+- Use smooth micro-interactions and subtle animations.
+- Add elegant hover effects throughout the website.
+- Use glassmorphism only where appropriate.
+- Use premium shadows, gradients, rounded corners, and clean layouts.
+- Avoid generic template designs.
+- Every section should feel custom designed.
+- Improve responsiveness for all screen sizes.
+- Follow accessibility best practices.
+- Follow SEO best practices.
+- Keep the code clean, modular, scalable and reusable.
+
+## Color System
+
+Improve the existing color palette.
+
+Keep the company identity based around:
+
+- Deep Navy
+- Warm Solar Amber
+- White
+- Soft Gray
+
+Create a premium color system with proper contrast and modern gradients.
+
+## Projects Section
+
+Completely redesign the Projects section.
+
+Instead of simple cards, create premium interactive project cards.
+
+Each card should include:
+
+- Large high-quality cover image
+- Beautiful gradient overlay
+- Project category badge
+- Project title
+- Project location
+- Project capacity (KW / MW)
+- Modern arrow button
+- Smooth hover animations
+- Image zoom on hover
+- Card elevation
+- Premium shadows
+- Rounded corners
+- Elegant transitions
+
+The cards should be displayed inside a beautiful responsive grid with generous spacing.
+
+Clicking a project card should navigate to a dedicated Project Details page.
+
+## Project Details Page
+
+Design a premium case-study page.
+
+Include sections such as:
+
+- Large Hero image
+- Project title
+- Project description
+- Project gallery
+- Location
+- Capacity
+- System type
+- Completion date
+- Challenges
+- Solution
+- Results
+- CTA section encouraging users to request a quotation
+
+The page should feel like a professional engineering portfolio rather than a simple blog page.
+
+## Contact Section
+
+Create a modern Contact section.
+
+Include:
+
+- Beautiful contact form
+- Name
+- Phone
+- Email
+- Company
+- Message
+
+The form should look premium with modern inputs and focus states.
+
+Next to the form, add:
+
+- Company information
+- Address
+- Phone numbers
+- Email
+- Working hours
+
+Also include a beautiful embedded Google Map section.
+
+## Important
+
+Assume that ALL current text, images, project information, icons and placeholder content will be replaced later.
+
+Do NOT optimize the design around the existing dummy content.
+
+Build reusable components that can easily receive real data in the future.
+
+Use placeholder images only as temporary content.
+
+The layout should be designed to work perfectly regardless of the future content.
+
+Do not hardcode business data inside components.
+
+Use reusable data structures so replacing the content later requires minimal effort.
+
+The final result should look like a premium international solar energy company website with world-class UI/UX.
