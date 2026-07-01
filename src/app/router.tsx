@@ -1,21 +1,25 @@
-import { createBrowserRouter } from "react-router-dom"
-import RootLayout from "@/components/layout/RootLayout"
-import Home from "@/pages/Home"
-import About from "@/pages/About"
-import Projects from "@/pages/Projects"
-import ProjectDetails from "@/pages/ProjectDetails"
-import Contact from "@/pages/Contact"
+import { createBrowserRouter } from 'react-router-dom';
+import RootLayout from '@/components/layout/RootLayout';
+import React, { Suspense, lazy } from 'react';
+
+const Home = lazy(() => import('@/pages/Home'));
+const About = lazy(() => import('@/pages/About'));
+const Projects = lazy(() => import('@/pages/Projects'));
+const ProjectDetails = lazy(() => import('@/pages/ProjectDetails'));
+const Contact = lazy(() => import('@/pages/Contact'));
+
+const withSuspense = (el: JSX.Element) => <Suspense fallback={<div aria-hidden />} >{el}</Suspense>;
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "about", element: <About /> },
-      { path: "projects", element: <Projects /> },
-      { path: "projects/:id", element: <ProjectDetails /> },
-      { path: "contact", element: <Contact /> },
+      { index: true, element: withSuspense(<Home />) },
+      { path: 'about', element: withSuspense(<About />) },
+      { path: 'projects', element: withSuspense(<Projects />) },
+      { path: 'projects/:id', element: withSuspense(<ProjectDetails />) },
+      { path: 'contact', element: withSuspense(<Contact />) },
     ],
   },
-])
+]);
